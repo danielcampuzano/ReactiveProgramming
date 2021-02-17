@@ -1,0 +1,11 @@
+https://www.reactive-streams.org/
+
+https://github.com/reactive-streams/reactive-streams-jvm
+
+Reactive Manifesto
+
+https://www.reactivemanifesto.org/
+
+IBM Reactive
+
+https://developer.ibm.com/depmodels/reactive-systems/articles/defining-the-term-reactive/
