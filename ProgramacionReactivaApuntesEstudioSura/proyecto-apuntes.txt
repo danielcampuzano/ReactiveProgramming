@@ -1,0 +1,37 @@
+***********************************************LOMBOK************************************************************************
+Library to avoid using getters and setters (Boilerplate code)
+-It also has other functionalities like closing buffers, etc.
+
+*************************************REACTIVE STREAMS***************************************************************
+https://www.reactive-streams.org/
+
+A data stream is a countably infinite sequence of elements. Different models of data streams exist that take different approaches with respect to the mutability of the stream and to the structure of stream elements. Stream processing refers to analyzing data streams on-the-fly to produce new results as new input data becomes available.
+
+Handling streams of data—especially “live” data whose volume is not predetermined—requires special care in an asynchronous system. The most prominent issue is that resource consumption needs to be controlled such that a fast data source does not overwhelm the stream destination.
+
+Asynchrony is needed in order to enable the parallel use of computing resources, on collaborating network hosts or multiple CPU cores within a single machine.
+
+The main goal of Reactive Streams is to govern the exchange of stream data across an asynchronous boundary — think passing elements on to another thread or thread-pool — while ensuring that the receiving side is not forced to buffer arbitrary amounts of data. In other words, back pressure is an integral part of this model in order to allow the queues which mediate between threads to be bounded.
+
+
+*********************BACK PRESSURE***************************
+https://medium.com/@jayphelps/backpressure-explained-the-flow-of-data-through-software-2350b3e77ce7#:~:text=Backpressure%20is%20when%20the%20progress,way%20to%20look%20at%20it.
+
+In the software world “backpressure” is an analogy borrowed from fluid dynamics, like in automotive exhaust and house plumbing.
+
+****Resistance or force opposing the desired flow of data through software.
+
+The purpose of software is to take input data and turn it into some desired output data. That output data might be JSON from an API, it might be HTML for a webpage, or the pixels displayed on your monitor.
+
+Backpressure is when the progress of turning that input to output is resisted in some way. In most cases that resistance is computational speed — trouble computing the output as fast as the input comes in — so that’s by far the easiest way to look at it. But other forms of backpressure can happen too: for example, if your software has to wait for the user to take some action.
+
+By the way, you might eventually hear someone use the word “backpressure” to actually mean something has the ability to control or handle backpressure.
+For example, if someone says: “I made this new library with built-in backpressure…” they probably mean it somehow handles backpressure for you, not that it actually causes it.
+
+**********************************************SPRING WEB FLUX***************************************************
+Interesting ARTICLE BEFORE STARTING READING SPRING WEB FLUX: https://dzone.com/articles/what-are-reactive-streams-in-java
+
+https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html#webflux
+
+
+

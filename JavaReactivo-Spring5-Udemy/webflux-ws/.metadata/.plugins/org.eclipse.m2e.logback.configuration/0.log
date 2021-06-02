@@ -841,3 +841,6 @@
 2021-02-16 20:33:38,471 [Worker-1: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Estudio\BACK\ProgramacionReactiva\JavaReactivo-Spring5-Udemy\webflux-ws\spring-boot-webflux\src\test\resources
 2021-02-16 20:37:00,624 [Worker-9: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
 2021-02-16 20:37:00,625 [Worker-9: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2021-02-16 20:37:00,625 [Worker-9: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2021-02-16 20:37:00,628 [Worker-9: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2021-02-16 20:37:00,628 [Worker-9: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Estudio\BACK\ProgramacionReactiva\JavaReactivo-Spring5-Udemy\webflux-ws\spring-boot-webflux\src\test\resources

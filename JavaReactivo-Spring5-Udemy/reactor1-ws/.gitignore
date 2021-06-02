@@ -1,0 +1,14 @@
+# generados por los IDE
+*.iml
+*.classpath
+*.project
+.metadata/
+.settings/
+.idea/
+.gradle/
+ 
+# generados por gradle
+bin/
+build/
+
+.svn/

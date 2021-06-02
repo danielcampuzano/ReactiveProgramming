@@ -1,0 +1,51 @@
+https://www.youtube.com/watch?v=y3MWfPDmVqo&t=150s
+
+https://github.com/CodelyTV/java-ddd-skeleton
+
+CLEAN ARCHITECURE
+
+- Desacopla la lógica de dominio de la infraestructura (Framework hace parte de la infraestructura)
+- Actualizar versiones de framework es mucho mas fácil porque se elimina mucho el acople con el framework
+- Hay tipos de clean architecture: Arquitectura de cebolla, DCI, hexagonal etc.
+
+
+******** HEXAGONAL ********** Capa de infraestructura, capa de aplicación, capa de dominio.
+
+- Regla de dependencia: De afuera hacia adentro
+
+APLICACIÓN: Casos de uso
+DOMINIO: Entidades, value objects
+INFRAESTRUCTURA: Todo lo que toca entrada y salida en nuestro sistema. Ejemplo: Persistencia en base de datos, framework, llamado a librería externa. Todas esas cosas que no son nuestras, que no son de nuestro dominio.
+
+************EJEMPLO GENERAL
+
+*Tengo Entidades --> User(userId, name, surnames) y Product(productId, description) --> DOMINIO (Es todo de lo que hablamos siempre en negocio)
+
+*Tengo Usecases --> USER REGISTER, PRODUCT CREATOR, ETC --> APLICACION
+
+*Tengo interfaces --> UserRepository y ProductRepository --> Estas abstracciones para conectarnos a la base de datos TAMBIEN HACEN PARTE DEL DOMINIO --> Los clientes de estas interfaces son los casos de uso
+
+*EXCEPCIONES --> ProductNotFound -> DOMINIO porque la lanzamos nosotros desde nuestros casos de uso
+
+*EVENTO DE DOMINIO --> Un producto se ha creado -> ProductCreated --> DOMINIO
+
+*ERRORES EN IMPLEMENTACIÓN DE UN REPOSITORY: MySqlUserRepository, ElasticProductRepository ----> INFRAESTRUCTURA -> SON ERRORES DE INFRAESTRUCTURA
+
+* CONTROLLER --> ProductPostController, UserGetController --> INFRAESTRUCTURA asi estén o no acoplados al framework
+
+*************************************************************************
+Formas de organizar los encarpetados:
+
+
+1. Concepto o quien eres --> Usuario, Producto, etc. Dificil de escalar
+2. Que eres? --> Controller, Repository, etc
+3. Que tipo eres --> Infraestructura, application, domain
+4. Por tipo y quien eres --> Infraestructura, application, domain -> Y por dentro otra capa con quin eres (Product, user, etc) --> Hace falta cohesión
+
+********EL QUE GUSTA EN EL VIDEO ES**************
++++Por quien eres y que tipo
+Aporta mas semantica de negocio y hace que todo escale mucho mejor
+
+Ejemplo: Producto y por dentro application, infraestructura, domain, etc.
+
+--> A primer nivel vamos a tener tantas carpetas como entidades tengamos en nuestro negocio.
