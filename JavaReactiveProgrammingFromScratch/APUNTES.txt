@@ -1,0 +1,109 @@
+-> USING THREADS IS NOT SCALABLE IF YOU HAVE FOR EXAMPLE A LOT OF IOPs because the thread is blocked and will continue blocked until the operation finishes.
+
+-> With cloud it is use to use autoscaling but it is not the best solution.
+
+***********************EVENT DRIVEN************************
+- There will be an event loop, usually one thread per CPU call.
+- Every time a request comes in it is added into the que (It doesn't exist, it's just for a better understanding)
+-> Event loop reads the task from the que and execute it and will not wait for the result to arrive, then it continues with another task.
+-> When the response is ready the loop is notified and the callback (task to be executed with the answer) is placed in the que and then executed by the event loop.
+
+--> IT IS NOT THE BEST WAY TO READ AND MAINTAIN.
+
+********* TYPES OF IO MODELS **********************
+
+1. Sync + blocking -> Used most of the time.
+2. Async -> A thread delegates another thread that makes all the process and then notifies
+3. Non-blocking -> The OS notified our thread that our task is done
+4. Async + Non-blocking
+
+**************REACTIVE STREAMS***************************
+Twitter, Netflix, entre otros -> 2014 --> Specification
+
+-> It is based on the observer pattern: A person publish a twit and its followers can see it, if the followers retwit it their followers are notified and can see it as well.
+
+-> Observe and react!
+
+-> THE REACTIVE STREAMS IS A SET OF INTERFACES:
+- Publisher
+- Subscriber 
+- Subscription
+- Processor -> Can act both like a publisher and a subscriber
+
+***************REACTIVE PROGRAMMING*******************************
+Subset / Special case of event driven / asynchronous programming
+
+-> You register a set of callbacks or listeners to be exceuted as soon as data goes through that pipeline or chain
+-> It´s a declarative data-flow programming
+
+****************************PILLLARS
+-> Asynchronous data processing
+-> Non-blocking
+-> Functional Style / Declarative
+
+**********************PUBLISHER - Subscriber *************************
+- A SUBSCRIBER wants to ge updates from the PUBLISHER
+- PUBLISHER has subscribe method that lets the PUBLISHER receives a SUBSCRIBER
+- When the PUBLISHER accepts the request of the SUBSCRIBER he hands over the SUBSCRIPTION object to the SUBSCRIBER
+-> With the onsubscribe method the SUBSCRIBER can talk to the PUBLISHER
+-> The PUBLISHER sends data using the ON NEXT method from the SUBSCRIBER
+-> The PUBLISHER calls the ON COMPLETE method the PUBLISHER won't send any more data to the subscriber.
+
+*TERMINOLOGY
+
+PUBLISHER -> Source, observable, producer, upstream
+
+SUBSCRIBER -> Sink, observer, downstream, consumer
+
+****MONO(PUBLISHER) -> Emits 0 or 1 item followed by ONCOMPLETE or ONERROR
+****FLUX (PUBLISHER)-> Emits 0 or N items followed by ONCOMPLETE or ONERROR
+
+Mono when you are sure there´s only one item expected otherwise Flux
+
+*************************************************************************************************************************
+**************************************************OPERATORS**************************************************************************************
+*************************************************************************************************************************
+
+HANDLE -> filter + map
+
+DO HOOKS -> CALLBACKS
+
+LIMIT RATE -> Subscriber asks for 400 items with a limit rate of 100 - when 75 objects are received the subscriber asks for more items 
+
+SWITCH IF EMPTY -> I define a fallback -> So for example if I ask the cache and it doesn't return any value so I can ask the directly to the DB.
+
+TRANSFORM -> When you want to reuse steps -> You can build steps separated and then reuse it
+
+SWITCH ON FIRST -> You ask for the first item and if it is in the expected format it continues, but if not it switches to another operation an then continues with the pipeline.
+
+MAP -> Is usually one by one, you send an object and you get another one
+
+FLAT MAP -> It is not one by one, it flattens all the objects
+
+
+**********************************************************************************************************************************************
+************************************************THREADING AND SCHEDULERS**********************************************************************
+**********************************************************************************************************************************************
+
+--> Usually the process of publisher, subscriber, handling the subscription happens on the same thread.
+
+-> You can execute tasks asynchronously using Schedulers method :
+-boundedElastic - network, time consuming calls 
+- parallel - CPU intensive tasks
+- single - a single dedicated thread for one-off tasks
+- immediate - current thread
+
+*****WHEN YOU HAVE MULTIPLE SUBSCRIBE ON the closest to the publisher will have precedence.
+****WHEN you expose a Flux you should add subscribeOn in order to expose it asynchronously
+
+******OPERATORS**************************************************************************************
+- SUBSCRIBEON -> For Upstream -> It launches a new thread
+- PUBLISHON -> For Downstream -> It will swith to another thread pool as soon as it finds the publish on
+
+*****************************************************TAKE A LOOK**************************************************************
+SCHEDULERS != PARALELL EXECUTION
+All the operation are always executed in sequential
+Data is processed one by one via 1 thread in the ThreadPool for a Subscriber
+SCHEDULERS.parallel is a thread pool for CPU tasks -> Doesn´t mean paralell execution
+
+Every subscriber will have a thread, but it is different than saying that every operation occurs in a different thread
