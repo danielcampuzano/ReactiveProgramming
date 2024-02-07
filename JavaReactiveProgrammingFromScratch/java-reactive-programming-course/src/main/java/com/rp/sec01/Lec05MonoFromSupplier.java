@@ -13,6 +13,9 @@ public class Lec05MonoFromSupplier {
         // use just only when you have data already
        // Mono<String> mono = Mono.just(getName());
 
+        //If you need to calculate something use supplier
+        //It will just be invoked when you suscribe
+        //It is goo because you keep things lazy
         Supplier<String> stringSupplier = () -> getName();
         Mono<String> mono = Mono.fromSupplier(stringSupplier);
         mono.subscribe(

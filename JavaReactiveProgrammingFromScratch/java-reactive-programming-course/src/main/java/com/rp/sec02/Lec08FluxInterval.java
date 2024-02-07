@@ -9,6 +9,7 @@ public class Lec08FluxInterval {
 
     public static void main(String[] args) {
 
+        //It is useful when you want to update something periodically to the user
         Flux.interval(Duration.ofSeconds(1))
                 .subscribe(Util.onNext());
 

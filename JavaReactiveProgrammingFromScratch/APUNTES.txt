@@ -1,4 +1,4 @@
--> USING THREADS IS NOT SCALABLE IF YOU HAVE FOR EXAMPLE A LOT OF IOPs because the thread is blocked and will continue blocked until the operation finishes.
+-> USING THREADS IS NOT SCALABLE IF YOU HAVE FOR EXAMPLE A LOT OF IOPs because the thread is blocked and will continue blocked until the operation finishes. It is not scalable and you need many resources
 
 -> With cloud it is use to use autoscaling but it is not the best solution.
 
@@ -97,8 +97,8 @@ FLAT MAP -> It is not one by one, it flattens all the objects
 ****WHEN you expose a Flux you should add subscribeOn in order to expose it asynchronously
 
 ******OPERATORS**************************************************************************************
-- SUBSCRIBEON -> For Upstream -> It launches a new thread
-- PUBLISHON -> For Downstream -> It will swith to another thread pool as soon as it finds the publish on
+- SUBSCRIBEON -> For Upstream (From bottom to top) -> It launches a new thread -> the closest to the publisher will have precedence -> Affects the SOURCE
+- PUBLISHON -> For Downstream (From top to bottom) -> It will swith to another thread pool as soon as it finds the publish on
 
 *****************************************************TAKE A LOOK**************************************************************
 SCHEDULERS != PARALELL EXECUTION
@@ -107,3 +107,42 @@ Data is processed one by one via 1 thread in the ThreadPool for a Subscriber
 SCHEDULERS.parallel is a thread pool for CPU tasks -> Doesn´t mean paralell execution
 
 Every subscriber will have a thread, but it is different than saying that every operation occurs in a different thread
+
+************************************ PARALELL EXECUTION ******************************************
+- By default things are executed sequentially one by one a the publisher publish items
+****OPERATORS
+- paralell 
+- runOn
+
+You need to know what you are doing -> For example if you are adding to a List (which is not threadsafe) in parallel it won´t work as expected.
+
+*********************************************************************************************************************
+***********************************SINKS*****************************************************************************
+*********************************************************************************************************************
+You can emmit signals manually -> And send when you want
+You can emmit signals from various threads
+
+-> A sink is both a publisher and a subscriber --> Sinks are better alternatives to procesors and very easy to use
+-> A sink can also be exposed as a mono and a Flux
+
+- Sinks.one() -> Is a mono  --> You can use sink.asMono()
+- Sinks.Many() -> sink.asFlux()
+
+************************************************************************************************************************
+**************************************BACK PRESSURE OVER FLOW STRATEGY**************************************************
+************************************************************************************************************************
+
+What happens if the producer produces 10000 items per second but the pipeline can process 1 item per second??
+
+*************************************************************************************************************************
+**************************************UNIT TESTING STEP VERIFIER*********************************************************
+*************************************************************************************************************************
+
+
+
+
+**************MY CONCLUSIONS
+- Reactive programming doesnt mean paralellism, by default it doesnt work like that.
+- Reactive programming means that threads are not blocked, so you subscribeon(schedulers.boundedElastic) means that a new thread will be created to execute the operations and the main thread will not be blocked so that it can continue performing other operations required by the program.
+- So what are really the advantages and when to use reactive programming? --> Which are the apropriate scenarios for using it?
+

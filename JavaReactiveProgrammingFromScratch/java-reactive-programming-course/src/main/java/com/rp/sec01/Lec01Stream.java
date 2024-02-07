@@ -17,6 +17,7 @@ public class Lec01Stream {
                                         });
 
         //System.out.println(stream);
+        //The above expression didnt do anything because it wasnt a terminal operation
         stream.forEach(System.out::println);
 
     }

@@ -13,6 +13,8 @@ public class NameGenerator {
         return list;
     }*/
 
+    //With flux is better because you dont need to wait N seconds to the result
+    //On the other hand, using the list implementation above you have to wait N seconds
     public static Flux<String> getNames(int count){
        return Flux.range(0, count)
                 .map(i -> getName());

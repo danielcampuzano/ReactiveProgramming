@@ -7,6 +7,7 @@ public class Lec04MonoEmptyOrError {
 
     public static void main(String[] args) {
 
+        //SUSCRIBER
         userRepository(20)
                 .subscribe(
                         Util.onNext(),
@@ -16,7 +17,7 @@ public class Lec04MonoEmptyOrError {
 
     }
 
-
+    //PUBLISHER
     private static Mono<String> userRepository(int userId){
         // 1
         if(userId == 1){
